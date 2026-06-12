@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ТехноУчёт v1.0</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ШАПКА -->
+  <header class="site-header">
+    <div class="header-brand">
+      <span class="brand-icon">⚙</span>
+      <div class="brand-text">
+        <span class="brand-name">ТехноУчёт</span>
+        <span class="brand-version">v1.0 / Service Dashboard</span>
+      </div>
+    </div>
+    <div class="header-counter">
+      <span class="counter-label">АКТИВНЫХ РЕМОНТОВ</span>
+      <span class="counter-value" id="activeCounter">3</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- СТАТИСТИКА -->
+    <section class="stats-grid">
+      <div class="stat-card stat-card--work">
+        <div class="stat-card__icon">🔧</div>
+        <div class="stat-card__body">
+          <span class="stat-card__value" id="statInWork">2</span>
+          <span class="stat-card__label">В работе</span>
+        </div>
+        <div class="stat-card__glow"></div>
+      </div>
+      <div class="stat-card stat-card--waiting">
+        <div class="stat-card__icon">📦</div>
+        <div class="stat-card__body">
+          <span class="stat-card__value">1</span>
+          <span class="stat-card__label">Ожидают запчасти</span>
+        </div>
+        <div class="stat-card__glow"></div>
+      </div>
+      <div class="stat-card stat-card--ready">
+        <div class="stat-card__icon">✅</div>
+        <div class="stat-card__body">
+          <span class="stat-card__value" id="statReady">0</span>
+          <span class="stat-card__label">Готовы к выдаче</span>
+        </div>
+        <div class="stat-card__glow"></div>
+      </div>
+    </section>
+
+    <!-- ТАБЛИЦА ЗАКАЗОВ -->
+    <section class="orders-section">
+      <div class="section-header">
+        <span class="section-title">// ТЕКУЩИЕ ЗАКАЗЫ</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="orders-table" id="ordersTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Устройство</th>
+              <th>Неисправность</th>
+              <th>Статус</th>
+              <th>Стоимость</th>
+              <th>Действие</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-order-id="TU-001">
+              <td class="cell-id"><span class="order-id">TU-001</span></td>
+              <td class="cell-device">
+                <span class="device-icon">💻</span>
+                Ноутбук Asus X550C
+              </td>
+              <td class="cell-fault">КЗ по линии 19V, замена чарджера</td>
+              <td class="cell-status">
+                <span class="status-badge status--repair">Пайка / Ремонт</span>
+              </td>
+              <td class="cell-price">3 200 ₽</td>
+              <td class="cell-action">
+                <button class="btn-complete" onclick="completeRepair(this)">
+                  <span>Завершить ремонт</span>
+                </button>
+              </td>
+            </tr>
+            <tr data-order-id="TU-002">
+              <td class="cell-id"><span class="order-id">TU-002</span></td>
+              <td class="cell-device">
+                <span class="device-icon">🖥</span>
+                Монитор LG 24MP88
+              </td>
+              <td class="cell-fault">Циклическая перезагрузка, сухие конденсаторы БП</td>
+              <td class="cell-status">
+                <span class="status-badge status--diag">Диагностика</span>
+              </td>
+              <td class="cell-price">1 800 ₽</td>
+              <td class="cell-action">
+                <button class="btn-complete" onclick="completeRepair(this)">
+                  <span>Завершить ремонт</span>
+                </button>
+              </td>
+            </tr>
+            <tr data-order-id="TU-003">
+              <td class="cell-id"><span class="order-id">TU-003</span></td>
+              <td class="cell-device">
+                <span class="device-icon">🖥</span>
+                ПК — Custom Build
+              </td>
+              <td class="cell-fault">Не включается, диагностика цепей питания</td>
+              <td class="cell-status">
+                <span class="status-badge status--diag">Диагностика</span>
+              </td>
+              <td class="cell-price">2 500 ₽</td>
+              <td class="cell-action">
+                <button class="btn-complete" onclick="completeRepair(this)">
+                  <span>Завершить ремонт</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>ТехноУчёт v1.0 © 2025 — Инженерная панель управления</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
