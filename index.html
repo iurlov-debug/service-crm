@@ -1,141 +1,87 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ТехноУчёт v1.0</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ТехноУчёт v1.0 — Панель управления СЦ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="app-container">
+        <!-- ШАПКА С СЧЁТЧИКОМ -->
+        <header class="dashboard-header">
+            <div class="logo-area">
+                <div class="logo-icon">🔧</div>
+                <div class="logo-text">
+                    <h1>ТехноУчёт <span class="version">v1.0</span></h1>
+                    <p>Инженерная система управления ремонтами</p>
+                </div>
+            </div>
+            <div class="active-counter-card">
+                <span class="counter-label">Активные ремонты</span>
+                <span class="counter-value" id="activeRepairsCount">0</span>
+            </div>
+        </header>
 
-  <!-- ШАПКА -->
-  <header class="site-header">
-    <div class="header-brand">
-      <span class="brand-icon">⚙</span>
-      <div class="brand-text">
-        <span class="brand-name">ТехноУчёт</span>
-        <span class="brand-version">v1.0 / Service Dashboard</span>
-      </div>
+        <!-- СТАТИСТИКА (3 карточки) -->
+        <section class="stats-grid">
+            <div class="stat-card in-progress">
+                <div class="stat-icon">⚙️</div>
+                <div class="stat-info">
+                    <span class="stat-title">В работе</span>
+                    <span class="stat-number" id="statInProgress">0</span>
+                </div>
+            </div>
+            <div class="stat-card waiting-parts">
+                <div class="stat-icon">📦</div>
+                <div class="stat-info">
+                    <span class="stat-title">Ожидают запчасти</span>
+                    <span class="stat-number" id="statWaitingParts">0</span>
+                </div>
+            </div>
+            <div class="stat-card ready">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <span class="stat-title">Готовы к выдаче</span>
+                    <span class="stat-number" id="statReady">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ИНЖЕНЕРНАЯ ТАБЛИЦА ЗАКАЗОВ -->
+        <div class="table-container">
+            <div class="table-header-actions">
+                <h2>📋 Текущие заказы / ремонтные листы</h2>
+                <div class="table-filters">
+                    <span class="filter-badge active">Все заказы</span>
+                </div>
+            </div>
+            <div class="responsive-table">
+                <table class="orders-table" id="ordersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Устройство</th>
+                            <th>Неисправность</th>
+                            <th>Статус</th>
+                            <th>Стоимость</th>
+                            <th>Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- Данные загружаются из JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="dashboard-footer">
+            <span>🔌 ТехноУчёт — Строгий учёт для сервисных центров</span>
+            <span>⚡ v1.0 • Инженерная панель</span>
+        </footer>
     </div>
-    <div class="header-counter">
-      <span class="counter-label">АКТИВНЫХ РЕМОНТОВ</span>
-      <span class="counter-value" id="activeCounter">3</span>
-    </div>
-  </header>
 
-  <main class="main-content">
-
-    <!-- СТАТИСТИКА -->
-    <section class="stats-grid">
-      <div class="stat-card stat-card--work">
-        <div class="stat-card__icon">🔧</div>
-        <div class="stat-card__body">
-          <span class="stat-card__value" id="statInWork">2</span>
-          <span class="stat-card__label">В работе</span>
-        </div>
-        <div class="stat-card__glow"></div>
-      </div>
-      <div class="stat-card stat-card--waiting">
-        <div class="stat-card__icon">📦</div>
-        <div class="stat-card__body">
-          <span class="stat-card__value">1</span>
-          <span class="stat-card__label">Ожидают запчасти</span>
-        </div>
-        <div class="stat-card__glow"></div>
-      </div>
-      <div class="stat-card stat-card--ready">
-        <div class="stat-card__icon">✅</div>
-        <div class="stat-card__body">
-          <span class="stat-card__value" id="statReady">0</span>
-          <span class="stat-card__label">Готовы к выдаче</span>
-        </div>
-        <div class="stat-card__glow"></div>
-      </div>
-    </section>
-
-    <!-- ТАБЛИЦА ЗАКАЗОВ -->
-    <section class="orders-section">
-      <div class="section-header">
-        <span class="section-title">// ТЕКУЩИЕ ЗАКАЗЫ</span>
-        <span class="section-line"></span>
-      </div>
-
-      <div class="table-wrapper">
-        <table class="orders-table" id="ordersTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Устройство</th>
-              <th>Неисправность</th>
-              <th>Статус</th>
-              <th>Стоимость</th>
-              <th>Действие</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr data-order-id="TU-001">
-              <td class="cell-id"><span class="order-id">TU-001</span></td>
-              <td class="cell-device">
-                <span class="device-icon">💻</span>
-                Ноутбук Asus X550C
-              </td>
-              <td class="cell-fault">КЗ по линии 19V, замена чарджера</td>
-              <td class="cell-status">
-                <span class="status-badge status--repair">Пайка / Ремонт</span>
-              </td>
-              <td class="cell-price">3 200 ₽</td>
-              <td class="cell-action">
-                <button class="btn-complete" onclick="completeRepair(this)">
-                  <span>Завершить ремонт</span>
-                </button>
-              </td>
-            </tr>
-            <tr data-order-id="TU-002">
-              <td class="cell-id"><span class="order-id">TU-002</span></td>
-              <td class="cell-device">
-                <span class="device-icon">🖥</span>
-                Монитор LG 24MP88
-              </td>
-              <td class="cell-fault">Циклическая перезагрузка, сухие конденсаторы БП</td>
-              <td class="cell-status">
-                <span class="status-badge status--diag">Диагностика</span>
-              </td>
-              <td class="cell-price">1 800 ₽</td>
-              <td class="cell-action">
-                <button class="btn-complete" onclick="completeRepair(this)">
-                  <span>Завершить ремонт</span>
-                </button>
-              </td>
-            </tr>
-            <tr data-order-id="TU-003">
-              <td class="cell-id"><span class="order-id">TU-003</span></td>
-              <td class="cell-device">
-                <span class="device-icon">🖥</span>
-                ПК — Custom Build
-              </td>
-              <td class="cell-fault">Не включается, диагностика цепей питания</td>
-              <td class="cell-status">
-                <span class="status-badge status--diag">Диагностика</span>
-              </td>
-              <td class="cell-price">2 500 ₽</td>
-              <td class="cell-action">
-                <button class="btn-complete" onclick="completeRepair(this)">
-                  <span>Завершить ремонт</span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <span>ТехноУчёт v1.0 © 2025 — Инженерная панель управления</span>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
